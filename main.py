@@ -8,7 +8,7 @@ class Game:
     def __init__(self):
         # GENERAL SETUP
         pygame.init()
-        self.sceen = pygame.display.set_mode((WIDTH, HEIGTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
         pygame.display.set_caption("Warhammer: Adventures")
         self.clock = pygame.time.Clock()
         self.level = Level()
@@ -20,7 +20,7 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.sceen.fill("black")
+            self.screen.fill("black")
             self.level.run()
             pygame.display.update()
             self.clock.tick(FPS)

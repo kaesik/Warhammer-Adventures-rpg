@@ -5,8 +5,9 @@ from settings import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstacle_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load("C:/Users/kamil/PycharmProjects/WARHAMMER_ADVENTURES/graphic/test/front_idle.png").convert_alpha()
-        self.rect = self.image.get_rect(topleft = pos)
+        self.image = pygame.image.load("./graphic/test/front_idle.png").convert_alpha()
+        self.rect = self.image.get_rect(topleft=pos)
+        self.hitbox = self.rect.inflate(-32, -26)
 
         self.direction = pygame.math.Vector2()
         self.speed = 5
@@ -18,22 +19,22 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_UP]:
             self.image = pygame.image.load(
-                "C:/Users/kamil/PycharmProjects/WARHAMMER_ADVENTURES/graphic/test/back_idle.png").convert_alpha()
+                "./graphic/test/back_idle.png").convert_alpha()
             self.direction.y = -1
         elif keys[pygame.K_DOWN]:
             self.image = pygame.image.load(
-                "C:/Users/kamil/PycharmProjects/WARHAMMER_ADVENTURES/graphic/test/front_idle.png").convert_alpha()
+                "./graphic/test/front_idle.png").convert_alpha()
             self.direction.y = 1
         else:
             self.direction.y = 0
 
         if keys[pygame.K_LEFT]:
             self.image = pygame.image.load(
-                "C:/Users/kamil/PycharmProjects/WARHAMMER_ADVENTURES/graphic/test/left_idle.png").convert_alpha()
+                "./graphic/test/left_idle.png").convert_alpha()
             self.direction.x = -1
         elif keys[pygame.K_RIGHT]:
             self.image = pygame.image.load(
-                "C:/Users/kamil/PycharmProjects/WARHAMMER_ADVENTURES/graphic/test/right_idle.png").convert_alpha()
+                "./graphic/test/right_idle.png").convert_alpha()
             self.direction.x = 1
         else:
             self.direction.x = 0
@@ -42,24 +43,28 @@ class Player(pygame.sprite.Sprite):
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
 
-        self.rect.center += self.direction * speed
+        self.hitbox.x += self.direction.x * speed
+        self.collision("horizontal")
+        self.hitbox.y += self.direction.y * speed
+        self.collision("vertical")
+        self.rect.center = self.hitbox.center
 
     def collision(self, direction):
         if direction == "horizontal":
             for sprite in self.obstacle_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.x > 0:  # MOVING RIGHT
-                        self.rect.right = sprite.rect.left
+                        self.hitbox.right = sprite.hitbox.left
                     if self.direction.x < 0:  # MOVING LEFT
-                        self.rect.left = sprite.rect.right
+                        self.hitbox.left = sprite.hitbox.right
 
         if direction == "vertical":
             for sprite in self.obstacle_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.y > 0:  # MOVING UP
-                        self.rect.up = sprite.rect.down
+                        self.hitbox.bottom = sprite.hitbox.top
                     if self.direction.y < 0:  # MOVING DOWN
-                        self.rect.down = sprite.rect.up
+                        self.hitbox.top = sprite.hitbox.bottom
 
     def update(self):
         self.input()
