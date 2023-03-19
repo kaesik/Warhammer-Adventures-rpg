@@ -8,7 +8,8 @@ class Game:
     def __init__(self):
         # GENERAL SETUP
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_icon(pygame.image.load('./graphic/settings/icon.png'))
         pygame.display.set_caption("Warhammer: Adventures")
         self.clock = pygame.time.Clock()
         self.level = Level()
