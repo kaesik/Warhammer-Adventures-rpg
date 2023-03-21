@@ -1,8 +1,12 @@
 import pygame
 
+
 class Entity(pygame.sprite.Sprite):
     def __init__(self, groups):
         super().__init__(groups)
+        self.obstacle_sprites = None
+        self.rect = None
+        self.hitbox = None
         self.frame_index = 0
         self.animation_speed = 0.10
         self.direction = pygame.math.Vector2()
