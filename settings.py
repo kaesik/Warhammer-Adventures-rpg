@@ -47,6 +47,24 @@ stats_data = {
     "speed": 6,
 }
 
+# MAX STATS DATA
+max_stats_data = {
+    "health": 300,
+    "energy": 150,
+    "attack": 20,
+    "magic": 10,
+    "speed": 10,
+}
+
+# UPGRADE COST
+upgrade_cost = {
+    "health": 100,
+    "energy": 100,
+    "attack": 100,
+    "magic": 100,
+    "speed": 100,
+}
+
 # ENEMY
 monster_data = {
     'squid': {'health': 100,

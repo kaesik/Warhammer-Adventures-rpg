@@ -40,10 +40,16 @@ class Player(Entity):
 
         # STATS
         self.stats = stats_data
+        self.max_stats = max_stats_data
         self.health = self.stats["health"]
         self.energy = self.stats["energy"]
-        self.exp = 123
+        self.exp = 1000
         self.speed = self.stats["speed"]
+
+        # DAMAGE TIMER
+        self.vulnerable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
 
     def import_player_assets(self):
         character_path = "./graphic/test/player/"
@@ -147,7 +153,7 @@ class Player(Entity):
         current_time = pygame.time.get_ticks()
 
         if self.attacking:
-            if current_time - self.attack_time >= self.attack_cooldown:
+            if current_time - self.attack_time >= self.attack_cooldown + weapon_data[self.weapon]["cooldown"]:
                 self.attacking = False
                 self.destroy_attack()
 
@@ -158,6 +164,10 @@ class Player(Entity):
         if not self.can_switch_magic:
             if current_time - self.magic_switch_time >= self.magic_switch_cooldown:
                 self.can_switch_magic = True
+
+        if not self.vulnerable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                self.vulnerable = True
 
     def animate(self):
         animation = self.animations[self.status]
@@ -171,9 +181,33 @@ class Player(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center=self.hitbox.center)
 
+        # FLICKER
+        if not self.vulnerable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
+
+    def get_full_weapon_damage(self):
+        base_damage = self.stats["attack"]
+        weapon_damage = weapon_data[self.weapon]["damage"]
+        return base_damage + weapon_damage
+
+    def get_full_magic_damage(self):
+        base_damage = self.stats["magic"]
+        spell_damage = magic_data[self.magic]["strength"]
+        return base_damage + spell_damage
+
+    def energy_recovery(self):
+        if self.energy < self.stats["energy"]:
+            self.energy += (0.01 * self.stats["magic"])
+        else:
+            self.energy = self.stats["energy"]
+
     def update(self):
         self.input()
         self.cooldown()
         self.get_status()
         self.animate()
         self.move(self.speed)
+        self.energy_recovery()

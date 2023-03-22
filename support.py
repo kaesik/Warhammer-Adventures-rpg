@@ -1,7 +1,6 @@
 from csv import reader
 from os import walk
 import pygame
-
 import pygame.image
 
 
