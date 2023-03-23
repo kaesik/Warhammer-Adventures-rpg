@@ -6,21 +6,27 @@ from random import randint
 class MagicPlayer:
     def __init__(self, animation_player):
         self.animation_player = animation_player
+        self.sound = {
+            "heal": pygame.mixer.Sound("./graphic/test/audio/heal.wav"),
+            "flame": pygame.mixer.Sound("./graphic/test/audio/flame.wav")
+        }
 
     def heal(self, player, strength, cost, groups):
         offset = pygame.math.Vector2(0, -50)
         if player.energy >= cost and player.health != player.stats["health"]:
             player.health += strength
             player.energy -= cost
+            self.sound["heal"].play()
             if player.health >= player.stats["health"]:
                 player.health = player.stats["health"]
             self.animation_player.create_particles("aura", player.rect.center, groups)
             self.animation_player.create_particles("heal", player.rect.center + offset, groups)
 
     def flame(self, player, cost, groups):
+
         if player.energy >= cost:
             player.energy -= cost
-
+            self.sound["flame"].play()
             if player.status.split("_")[0] == "right":
                 direction = pygame.math.Vector2(1, 0)
             elif player.status.split("_")[0] == "left":

@@ -9,7 +9,7 @@ class Player(Entity):
         super().__init__(groups)
         self.image = pygame.image.load("./graphic/test/player/ztest/down_idle.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(-32, -26)
+        self.hitbox = self.rect.inflate(-32, HITBOX_OFFSET["player"])
 
         # GRAPHIC SETUP
         self.import_player_assets()
@@ -41,6 +41,7 @@ class Player(Entity):
         # STATS
         self.stats = stats_data
         self.max_stats = max_stats_data
+        self.upgrade_cost = upgrade_cost_data
         self.health = self.stats["health"]
         self.energy = self.stats["energy"]
         self.exp = 1000
@@ -50,6 +51,10 @@ class Player(Entity):
         self.vulnerable = True
         self.hurt_time = None
         self.invulnerability_duration = 500
+
+        # IMPORT A SOUND
+        self.weapon_attack_sound = pygame.mixer.Sound("./graphic/test/audio/sword.wav")
+        self.weapon_attack_sound.set_volume(0.1)
 
     def import_player_assets(self):
         character_path = "./graphic/test/player/"
@@ -99,6 +104,7 @@ class Player(Entity):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 self.create_attack()
+                self.weapon_attack_sound.play()
 
             # MAGIC INPUT
             if keys[pygame.K_r]:
@@ -198,6 +204,12 @@ class Player(Entity):
         spell_damage = magic_data[self.magic]["strength"]
         return base_damage + spell_damage
 
+    def get_value_by_index(self, index):
+        return list(self.stats.values())[index]
+
+    def get_cost_by_index(self, index):
+        return list(self.upgrade_cost.values())[index]
+
     def energy_recovery(self):
         if self.energy < self.stats["energy"]:
             self.energy += (0.01 * self.stats["magic"])
@@ -209,5 +221,5 @@ class Player(Entity):
         self.cooldown()
         self.get_status()
         self.animate()
-        self.move(self.speed)
+        self.move(self.stats["speed"])
         self.energy_recovery()

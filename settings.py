@@ -3,6 +3,12 @@ WIDTH = 1920
 HEIGHT = 1080
 FPS = 60
 TILESIZE = 64
+HITBOX_OFFSET = {
+    "player": -26,
+    "object": -40,
+    "grass": -10,
+    "invisible": 0,
+}
 
 # UI
 BAR_HEIGHT = 20
@@ -22,6 +28,12 @@ TEXT_COLOR = "#EEEEEE"
 HEALTH_COLOR = "red"
 ENERGY_COLOR = "blue"
 UI_BORDER_COLOR_ACTIVE = "gold"
+
+# UPGRADE MENU
+TEXT_COLOR_SELECTED = "#111111"
+BAR_COLOR = "#EEEEEE"
+BAR_COLOR_SELECTED = "#111111"
+UPGRADE_BACKGROUND_COLOR_SELECTED = "#EEEEEE"
 
 # WEAPONS DATA
 weapon_data = {
@@ -57,7 +69,7 @@ max_stats_data = {
 }
 
 # UPGRADE COST
-upgrade_cost = {
+upgrade_cost_data = {
     "health": 100,
     "energy": 100,
     "attack": 100,
@@ -71,7 +83,7 @@ monster_data = {
               'exp': 100,
               'damage': 20,
               'attack_type': 'slash',
-              'attack_sound': '../audio/attack/slash.wav',
+              'attack_sound': './graphic/test/audio/attack/slash.wav',
               'speed': 3,
               'resistance': 3,
               'attack_radius': 80,
@@ -80,7 +92,7 @@ monster_data = {
                 'exp': 250,
                 'damage': 40,
                 'attack_type': 'claw',
-                'attack_sound': '../audio/attack/claw.wav',
+                'attack_sound': './graphic/test/audio/attack/claw.wav',
                 'speed': 2, 'resistance': 3,
                 'attack_radius': 120,
                 'notice_radius': 400},
@@ -88,7 +100,7 @@ monster_data = {
                'exp': 110,
                'damage': 8,
                'attack_type': 'thunder',
-               'attack_sound': '../audio/attack/fireball.wav',
+               'attack_sound': './graphic/test/audio/attack/fireball.wav',
                'speed': 4,
                'resistance': 3,
                'attack_radius': 60,
@@ -97,7 +109,7 @@ monster_data = {
                'exp': 120,
                'damage': 6,
                'attack_type': 'leaf_attack',
-               'attack_sound':'../audio/attack/slash.wav',
+               'attack_sound':'./graphic/test/audio/attack/slash.wav',
                'speed': 3,
                'resistance': 3,
                'attack_radius': 50,
