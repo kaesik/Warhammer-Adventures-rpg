@@ -162,12 +162,6 @@ class Level:
             self.player_attack_logic()
 
 
-
-
-
-        # debug(self.player.status)
-
-
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
         
