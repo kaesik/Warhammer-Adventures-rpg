@@ -103,40 +103,40 @@ class Item:
         """DISPLAYS BAR WITH SLIDER"""
 
         # DRAWING SETUP
-        top = self.rect.midtop + pygame.math.Vector2(0, 100)                                                            #
-        bottom = self.rect.midbottom - pygame.math.Vector2(0, 100)                                                      #
-        color = BAR_COLOR_SELECTED if selected else BAR_COLOR                                                           #
+        top = self.rect.midtop + pygame.math.Vector2(0, 100)                                                            # FINDS TOP OF THE BAR
+        bottom = self.rect.midbottom - pygame.math.Vector2(0, 100)                                                      # FINDS BOTTOM IF THE BAR
+        color = BAR_COLOR_SELECTED if selected else BAR_COLOR                                                           # GETS A COLOR DEPENDING ON WHETHER THE SELECTED OR NOT
 
         # BAR SETUP
-        full_height = bottom[1] - top[1]                                                                                #
-        relative_number = (value / max_value) * full_height                                                             #
-        value_rect = pygame.Rect(top[0]-15, bottom[1]-relative_number, 30, 10 )                                         #
+        full_height = bottom[1] - top[1]                                                                                # GETS THE HEIGHT OF THE BAR BASED ON THE TOP AND BOTTOM
+        relative_number = (value / max_value) * full_height                                                             # CHANGES VALUES TO PIXELS ON BAR
+        value_rect = pygame.Rect(top[0]-15, bottom[1]-relative_number, 30, 10)                                          # SLIDER ON BAR
 
         # DRAW ELEMENTS
-        pygame.draw.line(surface, color, top, bottom, 5)                                                                #
-        pygame.draw.rect(surface, color, value_rect)                                                                    #
+        pygame.draw.line(surface, color, top, bottom, 5)                                                                # PLACE THE BAR AS THE LINE
+        pygame.draw.rect(surface, color, value_rect)                                                                    # PLACE THE SLIDER AS THE RECTANGLE
 
     def trigger(self, player):
         """ALLOWS YOU TO UPGRADE A ATTRIBUTE AND INCREASE THE COST OF THE UPGRADE"""
-        upgrade_attribute = list(player.stats.keys())[self.index]                                                       #
+        upgrade_attribute = list(player.stats.keys())[self.index]                                                       # FINDS THE ATTRIBUTE BASED ON INDEX
 
         if player.exp >= player.upgrade_cost[upgrade_attribute] \
-                and player.stats[upgrade_attribute] < player.max_stats[upgrade_attribute]:                              #
-            player.exp -= player.upgrade_cost[upgrade_attribute]                                                        #
-            player.stats[upgrade_attribute] *= 1.2                                                                      #
-            player.upgrade_cost[upgrade_attribute] *= 1.4                                                               #
+                and player.stats[upgrade_attribute] < player.max_stats[upgrade_attribute]:                              # IF PLAYER EXP IS GREATER THAN UPGRADE COST ATTRIBUTE AND ATTRIBUTE IS NOT GREATER THAN MAX VALUE
+            player.exp -= player.upgrade_cost[upgrade_attribute]                                                        # SUBTRACT EXPERIENCE EQUAL TO THE COST OF ATTRIBUTE
+            player.stats[upgrade_attribute] *= 1.2                                                                      # MULTIPLIES AN ATTRIBUTE BY A GIVEN VALUE
+            player.upgrade_cost[upgrade_attribute] *= 1.4                                                               # MULTIPLIES AN COST OF THE ATTRIBUTE BY A GIVEN VALUE
 
-        if player.stats[upgrade_attribute] > player.max_stats[upgrade_attribute]:                                       #
-            player.stats[upgrade_attribute] = player.max_stats[upgrade_attribute]                                       #
+        if player.stats[upgrade_attribute] > player.max_stats[upgrade_attribute]:                                       # IF PLAYER ATTRIBUTE IS GREATER THAN MAX VALUE
+            player.stats[upgrade_attribute] = player.max_stats[upgrade_attribute]                                       # THEN PLAYER ATTRIBUTE IS EQUAL TO MAX VALUE
 
     def display(self, surface, selection_num, name, value, max_value, cost):
-        """"""
-        if self.index == selection_num:                                                                                 #
-            pygame.draw.rect(surface, UPGRADE_BACKGROUND_COLOR_SELECTED, self.rect)                                     #
-            pygame.draw.rect(surface, UI_BORDER_COLOR, self.rect, 4)                                                    #
-        else:                                                                                                           #
-            pygame.draw.rect(surface, UI_BACKGROUND_COLOR, self.rect)                                                   #
-            pygame.draw.rect(surface, UI_BORDER_COLOR, self.rect, 4)                                                    #
+        """HIGHLIGHTS THE SELECTED ITEM"""
+        if self.index == selection_num:                                                                                 # IF INDEX IS EQUAL TO SELECTED NUMBER
+            pygame.draw.rect(surface, UPGRADE_BACKGROUND_COLOR_SELECTED, self.rect)                                     # CHANGES BACKGROUND COLOR
+            pygame.draw.rect(surface, UI_BORDER_COLOR, self.rect, 4)                                                    # CHANGES BORDER COLO
+        else:                                                                                                           # ELSE
+            pygame.draw.rect(surface, UI_BACKGROUND_COLOR, self.rect)                                                   # COLOR IS NORMAL
+            pygame.draw.rect(surface, UI_BORDER_COLOR, self.rect, 4)                                                    # BORDER COLOR IS NORMAL
 
-        self.display_names(surface, name.title(), cost, self.index == selection_num)                                    #
-        self.display_bar(surface, value, max_value, self.index == selection_num)                                        #
+        self.display_names(surface, name.title(), cost, self.index == selection_num)                                    # DISPLAYS HIGHLIGHTED NAMES
+        self.display_bar(surface, value, max_value, self.index == selection_num)                                        # DISPLAYS HIGHLIGHTED BAR

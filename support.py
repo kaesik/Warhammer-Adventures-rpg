@@ -5,6 +5,7 @@ import pygame.image
 
 
 def import_csv_layout(path):
+    """IMPORTS CSV LAYOUT BASED ON THE GIVEN PATH"""
     terrain_map = []
     with open(path) as level_map:
         layout = reader(level_map, delimiter=",")
@@ -14,6 +15,7 @@ def import_csv_layout(path):
 
 
 def import_folder(path):
+    """IMPORTS FOLDER BASED ON THE GIVEN PATH"""
     surf_list = []
     for _, __, img_files in walk(path):
         for image in img_files:
