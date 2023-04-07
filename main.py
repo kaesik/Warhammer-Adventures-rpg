@@ -26,6 +26,8 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        print("Main Menu")
                     if event.key == pygame.K_m:
                         self.level.toggle_menu()
 
