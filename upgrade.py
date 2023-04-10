@@ -84,7 +84,7 @@ class Item:
         self.font = font                                                                                                # FINDS THE FONT
 
     def display_names(self, surface, name, cost, selected):
-        """DISPLAY TITLE AND COS OF THE ITEM"""
+        """DISPLAY TITLE AND COST OF THE ITEM"""
         color = TEXT_COLOR_SELECTED if selected else TEXT_COLOR                                                         # GETS A COLOR DEPENDING ON WHETHER THE SELECTED OR NOT
 
         # TITLE

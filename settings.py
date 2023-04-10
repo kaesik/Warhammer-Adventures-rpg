@@ -35,6 +35,14 @@ BAR_COLOR = "#EEEEEE"
 BAR_COLOR_SELECTED = "#111111"
 UPGRADE_BACKGROUND_COLOR_SELECTED = "#EEEEEE"
 
+# MAIN MENU
+BACKGROUND_IMAGE = "./graphic/menu/background.jpg"
+START_IMAGE = "./graphic/menu/menu_start.png"
+RESUME_IMAGE = "./graphic/menu/menu_resume.png"
+OPTION_IMAGE = "./graphic/menu/menu_option.png"
+EXIT_IMAGE = "./graphic/menu/menu_exit.png"
+
+
 # WEAPONS DATA
 weapon_data = {
     "sword": {"cooldown": 100, "damage": 15, "graphic": "./graphic/test/weapons/sword/full.png"},
@@ -109,7 +117,7 @@ monster_data = {
                'exp': 120,
                'damage': 6,
                'attack_type': 'leaf_attack',
-               'attack_sound':'./graphic/test/audio/attack/slash.wav',
+               'attack_sound': './graphic/test/audio/attack/slash.wav',
                'speed': 3,
                'resistance': 3,
                'attack_radius': 50,
