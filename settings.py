@@ -39,9 +39,10 @@ UPGRADE_BACKGROUND_COLOR_SELECTED = "#EEEEEE"
 BACKGROUND_IMAGE = "./graphic/menu/background.jpg"
 START_IMAGE = "./graphic/menu/menu_start.png"
 RESUME_IMAGE = "./graphic/menu/menu_resume.png"
-OPTION_IMAGE = "./graphic/menu/menu_option.png"
+OPTIONS_IMAGE = "./graphic/menu/menu_options.png"
 EXIT_IMAGE = "./graphic/menu/menu_exit.png"
-
+SAVE_IMAGE = "./graphic/menu/menu_save.png"
+LOAD_IMAGE = "./graphic/menu/menu_load.png"
 
 # WEAPONS DATA
 weapon_data = {
