@@ -15,4 +15,5 @@ Day 4 - Not much, my cat had surgery. He survived. Some new graphics by my graph
 Day 5 - I added some basic opponents, a typical placeholder. In the future they will be Beastmans or Greenskins. So far I haven't implemented damage, but that will be done tomorrow. \
 Day 6 - Today was quite a busy day. I implemented monster damage. I added a magic system, two spells so far. I added particles. I started working on the pause and character development system. \
 Day 7 - I added sounds and an attribute upgrade system. The code is getting pretty substantial so I'm starting to enter comments. \
-Day 8 - I visit my mother. I haven't done too much, I'm putting some comments in the code.
+Day 8 - I visit my mother. I haven't done too much, I'm putting some comments in the code. \
+Day 9 - I am trying to implement the menu. In the meantime I'm working on graphics, I don't like to do it.
